@@ -1,0 +1,204 @@
+---
+title: "Vic LRE manuscript"
+author: "Jia Qi Beh"
+date: "2026-05-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# APG One Health Enterococcus manuscript - analysis
+
+This document contains all R packages and codes used in the bioinformatic analyses of the manuscript 'Genomics to understand the global landscape of linezolid resistance in Enterococcus faecium and Enterococcus faecalis'.
+
+
+# Genome download
+
+Download Illumina reads from NCBI SRA using kingfisher (https://github.com/wwood/kingfisher-download).
+
+```{bash}
+# Create ENA accessions file.
+# Run kingfisher
+for line in $(cat accessions.txt); do kingfisher get -r ${line} -m ena-ascp aws-http prefetch --download-threads 10 -f fastq.gz -t 8; done
+```
+
+
+# fastp
+version 0.23.2
+
+```{bash}
+# create accessions.txt
+# run fastp
+for line in $(cat accessions.txt); do fastp --thread 16 -r -W 4 -M 20 -l 36 -i ${line}_1.trim.fastq.gz -I ${line}_2.trim.fastq.gz -o ${line}_R1_trimmed.fastq.gz -O ${line}_R2_trimmed.fastq.gz -j ${line}.json -h ${line}.html ; done
+```
+
+
+# short-read assembly
+spades version 3.15.5 (using shovill)
+
+```{bash}
+# create accession.txt
+# run shovill
+while read line; do nice shovill --outdir ${line} --R1 ${line}_R1_trimmed.fastq.gz --R2 ${line}_R2_trimmed.fastq.gz --cpus 16; done < accessions.txt
+```
+
+
+# long-read assembly
+porechop version 0.2.4
+filtlong version 0.2.1
+canu version 2.2
+unicycler version 0.5.0
+dragonflye version 1.1.0
+
+Run porechop
+```{bash}
+porechop -i input_reads.fastq.gz -o output_reads.fastq.gz
+```
+
+Run filtlong
+```{bash}
+filtlong --min_length 1000 --keep_percent 90 --target_bases 500000000 input.fastq.gz | gzip > output.fastq.gz
+```
+
+Run canu
+```{bash}
+canu -d ID -p ID genomeSize=3m -trimmed -nanopore ID_output.fastq.gz maxThreads=16
+```
+
+Run unicycler
+```{bash}
+unicycler -1 ID_R1.trimmed.fastq.gz -2 ID_R2.trimmed.fastq.gz -l ID_output.fastq.gz -o OUTPUT -t 12
+```
+
+Run dragonflye
+```{bash}
+dragonflye --gsize 3M --cpus 12 --outdir OUTPUT --reads ID.fastq.gz
+```
+
+
+# quast
+version 5.2.0
+
+```{bash}
+# create accession.txt
+# run quast
+for line in $(cat accessions.txt); do ${line}/contigs.fa -o ${line} -t 16; done
+```
+
+
+# prokka
+version 1.14.5
+
+```{bash}
+# create accession.txt
+# run prokka
+for line in $(cat accessions.txt); do prokka --outdir ${line} --prefix ${line} --cpus 16 ${line}/contigs.fa; done
+```
+
+
+# kraken2
+version 2.1.3
+
+```{bash}
+# make accessions file
+# run kraken2 with default database
+kraken2 --output ${line} --report output.txt assembly.fa
+```
+
+
+# mlst
+version 2.23.0
+
+```{bash}
+mlst --scheme efaecium assembly.fa --threads 10
+```
+
+
+# abritamr
+version 1.0.11
+
+```{bash}
+abritamr run --contigs input.txt --species Enterococcus_faecium -j 16
+abritamr run --contigs input.txt --species Enterococcus_faecalis -j 16
+```
+
+
+# lrefinder
+version 1.0
+
+```{bash}
+python3 LRE-Finder.py -ipe ID_R1_trimmed.fastq.gz ID_R2_trimmed.fastq.gz -o ID -t_db lre-finder/elmDB/elm -ID 80 -1t1 -cge -matrix
+```
+
+
+# mob-typer
+mobsuite version 3.0.3
+
+```{bash}
+mob_typer --infile assembly.fa --out_file output.txt
+```
+
+
+# bakta
+version 1.8.1
+
+```{bash}
+bakta --db /home/jbbeh/analysis/bakta/db assembly.fa
+```
+
+
+# snippy + iqtree
+version 4.4.5
+
+```{bash}
+# run snippy
+snippy --cpus 16 --outdir output --ref reference.gb --R1 ID_R1.trimmed.fastq.gz --R2 ID_R2.trimmed.fastq.gz
+
+# run snippy-core
+snippy-core AUSMDU* --ref reference.gbff
+
+# run iqtree v2.0.6
+iqtree -s core.aln -m GTR+I+G -B 1000 -nt 16
+```
+
+
+# rhierbaps
+version 1.1.4
+
+```{r}
+library(rhierbaps)
+library(tidyverse)
+library(ggtree)
+library(phytools)
+library(ape)
+
+snp.matrix <- load_fasta("core.aln.fasta")
+
+hb.results.2 <- hierBAPS(snp.matrix, max.depth = 2, n.pops = 20, n.extra.rounds = Inf, quiet = TRUE)
+
+#Load tree file
+iqtree <- ape::read.tree("input.treefile")
+iqtree
+
+#Check tree tips and rhierbaps 
+iqtree$tip.label
+hb.results.2$partition.df$Isolate
+
+hb.results.2$partition.df$Isolate %in% iqtree$tip.label
+iqtree$tip.label %in% hb.results.2$partition.df$Isolate
+
+all(iqtree$tip.label %in% hb.results.2$partition.df$Isolate)
+iqtree$tip.label[!iqtree$tip.label %in% hb.results.2$partition.df$Isolate] # this will print the missing names
+
+#Plot tree
+tree.3 <- ggtree(iqtree)
+tree.3 <- tree.3 %<+% hb.results.2$partition.df
+tree.3 <- tree.3 + geom_tippoint(aes(color = factor(`level 1`)))
+tree.3
+
+ggsave("tree.pdf", tree.3, width=8, height=6)
+```
+
