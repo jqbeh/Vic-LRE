@@ -1,0 +1,1222 @@
+---
+title: "OneHealth_visualisation"
+author: "Jia Qi Beh"
+date: "2026-04-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# APG One Health Enterococcus manuscript - visualisation
+
+This document contains all R packages and codes used to create the figures in the manuscript 'Prospective sampling reveals sharing of antimicrobial resistance genes in Enterococcus across One Health compartments'.
+
+
+# R Libraries
+
+```{r}
+pacman::p_load(
+  tidyverse,     # data management and visualization
+  rio,
+  UpSetR,        # special package for combination plots
+  ggupset,
+  ComplexUpset,
+  readxl,
+  readr,
+  reshape2,      # melt() function
+  svglite,
+  hrbrthemes,
+  viridis,
+  RColorBrewer,
+  pheatmap,
+  cowplot,
+  patchwork,
+  micropan,
+  matrixStats,
+  ggforce, 
+  reshape2,
+  ggtree,
+  here,
+  ape,
+  treeio,
+  ggnewscale,
+  phytools,
+  phangorn,
+  pals,
+  scales,
+  lubridate,
+  igraph,
+  networkD3,
+  htmlwidgets,
+  webshot,
+  rhierbaps,
+  rworldmap,
+  rwmGetColours,
+  plasmapR)
+```
+
+Set working directory
+```{r}
+setwd("~/Vic-LRE")
+```
+
+
+# Figure 1
+
+## 1a - barplots
+
+E. faecium plot
+```{r}
+efm <- read.csv("figure_1/efaecium.csv")
+efm
+
+# Replace all blank values with 'NA'
+efm[efm == ""] <- NA
+
+# Convert percentage
+efm.1 <- 
+  efm %>%
+  count(LzdMIC, LRgenotype, LREvsLSE) %>%
+  mutate(pct = n / sum(n) * 100) %>%
+  print()
+
+my_colours_efm <- c('#e07a5f', '#457b9d', '#ccc5b9')
+
+plot.efm <- 
+  ggplot(efm.1, aes(x = LzdMIC, y = pct, fill=LRgenotype))+ 
+  geom_col()+
+  scale_fill_manual(values = my_colours_efm)+
+  xlab("Linezolid MIC (ug/mL)")+
+  ylab("% isolates")+
+  theme_bw()+
+  theme(strip.text = element_text(face = "italic", size = 10), # Species font
+        legend.text = element_text(size = 7),
+        legend.title = element_text(size = 8, face = "bold"),
+        axis.title.x = element_text(face = "bold", size = 8),
+        axis.title.y = element_text(face = "bold", size = 8))+
+  labs(y=NULL)+  #remove y-axis label
+  guides(fill=guide_legend(title="Linezolid genotype"))
+
+plot.efm
+```
+
+E. faecalis plot
+```{r}
+efs <- read.csv("figure_1/efaecalis-only.csv")
+efs
+
+# Replace all blank values with 'NA'
+efs[efs == ""] <- NA
+
+# Convert percentage
+efs.1 <- 
+  efs %>%
+  count(LzdMIC, LRgenotype, LREvsLSE) %>%
+  mutate(pct = n / sum(n) * 100) %>%
+  print()
+
+my_colours_efs <- c('#e07a5f', '#ccc5b9')
+
+plot.efs <- 
+  ggplot(efs.1, aes(x = LzdMIC, y = pct, fill=LRgenotype))+ 
+  geom_col()+
+  scale_fill_manual(values = my_colours_efs)+
+  xlab("Linezolid MIC (ug/mL)")+
+  ylab("% isolates")+
+  theme_bw()+
+  theme(strip.text = element_text(face = "italic", size = 10), # Species font
+        legend.position = "none",
+        axis.title.x = element_text(face = "bold", size = 8),
+        axis.title.y = element_text(face = "bold", size = 8))+
+  guides(fill=guide_legend(title="Linezolid genotype"))
+
+plot.efs
+```
+
+Join plots
+```{r}
+combined_plot <- plot.efs + plot.efm  # arrange side-by-side
+combined_plot
+
+ggsave("figure_1.pdf", combined_plot, width=6, height=4, dpi=300)
+```
+
+## 1b - upset plot
+
+E. faecalis
+```{r}
+# Import data file 
+data <- read.csv("/Users/jbbeh/Downloads/_VicLRE/figure_1/efs_ggupset.csv")
+data
+
+# Reformat LR gene columns from wide to long 
+df <- reshape2::melt(data, id.vars = "ID", measure.vars = c("cfr","cfrB","cfrD","optrA","poxtA","G2576T"))  # change from wide to long format
+df
+
+df.1 <- df %>% subset(value == "Yes")
+df.1 <- df.1[,-3]
+df.1 <- df.1 %>% rename(Gene = variable)   # rename column 
+df.1
+
+# Group data by Gene
+df.2 <- 
+  df.1 %>% 
+  group_by(ID) %>%
+  summarize(Gene = list(Gene))
+df.2
+
+# Plot graph 
+plot <- 
+  df.2 %>%
+  ggplot(aes(x = Gene)) +
+  geom_bar() +
+  scale_x_upset() +
+  scale_y_continuous(breaks = c(2,4,6,8,10))   # set y-axis breaks
+plot
+
+# Save plot 
+ggsave("figure_1b.pdf", plot, width = 8, height = 8)
+```
+
+E. faecium
+```{r}
+# Import data file 
+data <- read.csv("/Users/jbbeh/Downloads/_VicLRE/figure_1/efm_ggupset.csv")
+data
+
+# Reformat LR gene columns from wide to long 
+df <- reshape2::melt(data, id.vars = "ID", measure.vars = c("cfr","cfrB","cfrD","optrA","poxtA","G2576T"))  # change from wide to long format
+df
+
+df.1 <- df %>% subset(value == "Yes")
+df.1 <- df.1[,-3]
+df.1 <- df.1 %>% rename(Gene = variable)   # rename column 
+df.1
+
+# Group data by Gene
+df.2 <- 
+  df.1 %>% 
+  group_by(ID) %>%
+  summarize(Gene = list(Gene))
+df.2
+
+# Plot graph 
+plot <- 
+  df.2 %>%
+  ggplot(aes(x = Gene)) +
+  geom_bar() +
+  scale_x_upset() +
+  scale_y_continuous(breaks = c(2,4,6,8,10))   # set y-axis breaks
+plot
+
+# Save plot 
+ggsave("figure_1b.pdf", plot, width = 8, height = 8)
+```
+
+
+# Figure 2
+
+Figure 2 was created using BRIG software: https://github.com/happykhan/BRIG
+
+
+# Figure 3
+
+## 3a - tree
+
+Run rhierbaps
+```{r}
+snp.matrix <- load_fasta("figure_3/core.aln.fasta")
+
+hb.results.2 <- hierBAPS(snp.matrix, max.depth = 2, n.pops = 20, n.extra.rounds = Inf, quiet = TRUE)
+baps_cluster_df <- hb.results.2$partition.df
+# write.csv(baps_cluster_df, "efs_baps_cluster.csv", row.names = FALSE)
+```
+
+Load tree file
+```{r}
+iqtree <- ape::read.tree("figure_3/core.aln.fasta")
+iqtree
+
+# Check tree tips and rhierbaps 
+iqtree$tip.label
+hb.results.2$partition.df$Isolate
+
+hb.results.2$partition.df$Isolate %in% iqtree$tip.label
+iqtree$tip.label %in% hb.results.2$partition.df$Isolate
+
+all(iqtree$tip.label %in% hb.results.2$partition.df$Isolate)
+iqtree$tip.label[!iqtree$tip.label %in% hb.results.2$partition.df$Isolate]
+
+# Plot tree
+tree.3 <- ggtree(iqtree)
+tree.3 <- tree.3 %<+% hb.results.2$partition.df
+tree.3 <- tree.3 + geom_tippoint(size=0.5, aes(color = factor(`level 1`)))
+tree.3
+
+# Load metadata
+sample_data <- read.csv("/Users/jbbeh/Downloads/_VicLRE/figure_3/ggtree_metadata.csv")
+View(sample_data)
+
+# Check whether the Isolate IDs in both files align correctly
+sample_data$ID %in% iqtree$tip.label
+iqtree$tip.label %in% sample_data$ID 
+
+# Add root and scale bar
+tree_mid <- midpoint(iqtree)
+tree_mid
+```
+
+Make tree with rhierbaps levels
+```{r}
+tree.3 <- ggtree(tree_mid, branch.length = 0.5) %<+% hb.results.2$partition.df +
+  geom_tippoint(size=0.5, aes(color = factor(`level 1`)))
+tree.3
+
+# Plot tree with metadata
+tree.4 <- tree.3 %<+% sample_data +
+  geom_rootedge(rootedge = 0.0005) +   # add root 
+  geom_treescale(y=20)
+tree.4
+
+# Heatmap 1: MDU
+mdu <- data.frame("MDU" = sample_data[,c("MDU")])
+rownames(mdu) <- sample_data$ID
+
+h1 <- 
+  gheatmap(tree.4, mdu, width = 0.04, color=NULL, offset=0.02,
+           colnames = FALSE) +
+  scale_fill_manual(name = "continent",
+                    values = c("#fb8500","#023047"),
+                    na.value="#023047",  # set colour of NA values
+                    breaks = c("Yes","No"),
+                    labels = c("Yes", "No")) +
+  theme(legend.position = "NULL")
+h1
+
+# Heatmap 2: continent
+length(unique(sample_data$continent))
+unique(sample_data$continent) #count total number of continents
+
+continent <- data.frame("continent" = sample_data[,c("continent")])
+rownames(continent) <- sample_data$ID
+
+h2 <- h1 + new_scale_fill()
+h3 <- 
+  gheatmap(h2, continent, width = 0.04, color=NULL, offset=0.03,
+           colnames = FALSE) +
+  scale_fill_manual(name = "continent",
+                    values = c("#f2cc8f", "#f2cc8f","#81b29a","#3d405b","#e07a5f","#fb6f92", "grey"),
+                    na.value="grey",  # set colour of NA values
+                    breaks = c("asia", "Asia", "Oceania", "South America", "North America", "Europe", ""),
+                    labels = c("asia", "Asia", "Oceania", "South America", "North America", "Europe", "")) +
+  theme(legend.position = "right")
+h3
+
+# Heatmap 3: sample type
+length(unique(sample_data$sample_type))
+unique(sample_data$sample_type)
+
+sample_data$sample_type <- as.factor(sample_data$sample_type) 
+sample_type <- data.frame("sample_type" = sample_data[,c("sample_type")])
+rownames(sample_type) <- sample_data$ID
+
+h4 <- h3 + new_scale_fill()
+h5 <- 
+  gheatmap(h4, sample_type, width = 0.04, color="white", offset=0.04,
+           colnames = FALSE) +
+  scale_fill_manual(name = "sample type",
+                    values = c("#840032","#002642", "#E59500", "#840032", "#840032", "white", "white"),
+                    na.value="white",  # set colour of NA values
+                    breaks = c("clinical", "animal", "environment","human", "human/clinical", "others"),
+                    labels = c("clinical", "animal", "environment","human", "human/clinical", "others"))
+h5
+
+# Heatmap 4: ST
+## Find top 10 prevalent STs
+result <- sample_data %>%
+  count(ST) %>%
+  arrange(desc(n))
+result
+
+sample_data$ST <- as.factor(sample_data$ST) 
+sample_data$ST[!(sample_data$ST %in% c("480", "506", "16","476", "631", "21", "368", "314", "585", "256"))] <- 'others'
+ST <- data.frame("ST" = sample_data[,c("ST")])
+rownames(ST) <- sample_data$ID
+
+h6 <- h5 + new_scale_fill()
+h7 <- 
+  gheatmap(h6, ST, width = 0.04, color="white", offset=0.05,
+           colnames = FALSE) +
+  scale_fill_manual(name = "sample type",
+                    values = c("#840032","#002642", "#E59500", "#669bbc", "#588157",
+                               "#ff99c8", "#83c5be", "#9f86c0", "#4361ee", "#f72585"),
+                    na.value="white",  # set colour of NA values
+                    breaks = c("480", "506", "16","476", "631", 
+                               "21", "368", "314", "585", "256"),
+                    labels = c("480", "506", "16","476", "631", 
+                               "21", "368", "314", "585", "256"))
+h7
+
+# Heatmap 4: LR gene cfr
+sample_data$cfr <- as.factor(sample_data$cfr) 
+cfr <- data.frame("cfr" = sample_data[,c("cfr")])
+rownames(cfr) <- sample_data$ID
+
+h8 <- h7 + new_scale_fill()
+h9 <- 
+  gheatmap(h8, cfr, width = 0.04, color="white", offset=0.06,
+           colnames = FALSE) +
+  scale_fill_manual(name = "cfr",
+                    values = c("black"),
+                    na.value="white",  # set colour of NA values
+                    breaks = c("yes"),
+                    labels = c("yes"))
+h9
+
+# Heatmap 5: LR gene cfr(B)
+sample_data$cfrB <- as.factor(sample_data$cfrB) 
+cfrB <- data.frame("cfrB" = sample_data[,c("cfrB")])
+rownames(cfrB) <- sample_data$ID
+
+h10 <- h9 + new_scale_fill()
+h11 <- 
+  gheatmap(h10, cfrB, width = 0.04, color="white", offset=0.07,
+           colnames = FALSE) +
+  scale_fill_manual(name = "cfrB",
+                    values = c("black"),
+                    na.value="white",  # set colour of NA values
+                    breaks = c("yes"),
+                    labels = c("yes"))
+h11
+
+# Heatmap 6: LR gene cfr(D)
+sample_data$cfrD <- as.factor(sample_data$cfrD) 
+cfrD <- data.frame("cfrD" = sample_data[,c("cfrD")])
+rownames(cfrD) <- sample_data$ID
+
+h12 <- h11 + new_scale_fill()
+h13 <- 
+  gheatmap(h12, cfrD, width = 0.04, color="white", offset=0.08,
+           colnames = FALSE) +
+  scale_fill_manual(name = "cfrD",
+                    values = c("black"),
+                    na.value="white",  # set colour of NA values
+                    breaks = c("yes"),
+                    labels = c("yes"))
+h13
+
+# Heatmap 7: LR gene optrA
+sample_data$optrA <- as.factor(sample_data$optrA) 
+optrA <- data.frame("optrA" = sample_data[,c("optrA")])
+rownames(optrA) <- sample_data$ID
+
+h14 <- h13 + new_scale_fill()
+h15 <- 
+  gheatmap(h14, optrA, width = 0.04, color="white", offset=0.09,
+           colnames = FALSE) +
+  scale_fill_manual(name = "optrA",
+                    values = c("black"),
+                    na.value="white",  # set colour of NA values
+                    breaks = c("yes"),
+                    labels = c("yes"))
+h15
+
+# Heatmap 8: LR gene poxtA
+sample_data$poxtA <- as.factor(sample_data$poxtA) 
+poxtA <- data.frame("poxtA" = sample_data[,c("poxtA")])
+rownames(poxtA) <- sample_data$ID
+
+h16 <- h15 + new_scale_fill()
+h17 <- 
+  gheatmap(h16, poxtA, width = 0.04, color="white", offset=0.10,
+           colnames = FALSE) +
+  scale_fill_manual(name = "poxtA",
+                    values = c("black"),
+                    na.value="white",  # set colour of NA values
+                    breaks = c("yes"),
+                    labels = c("yes"))+
+  theme(legend.position = "NULL")
+h17
+
+ggsave("~/Downloads/plot.pdf", h17, width=8, height=6, dpi = 320)
+```
+
+
+## 3b - barplots
+
+Load data
+```{r}
+data <- read.csv("figure_3/efm_metadata.csv")
+data
+```
+
+Count prevalent countries
+```{r}
+count_country <- 
+  data %>% dplyr::count(country) %>%
+  arrange(desc(n))
+count_country
+
+# Then select only the top 10 countries and change others into "Others"
+data.1 <-
+  data %>% 
+  mutate(newCountry = case_when(
+                           country == "Denmark" ~ "Others",
+                           country == "Ireland" ~ "Others",
+                           country == "South Korea" ~ "Others",
+                           country == "Portugal" ~ "Others",
+                           country == "Switzerland" ~ "Others",
+                           country == "Czech Republic" ~ "Others",
+                           country == "The Netherlands" ~ "Others",
+                           country == "Qatar" ~ "Others",
+                           country == "Vietnam" ~ "Others",
+                           country == "Brazil" ~ "Others",
+                           country == "Spain" ~ "Others",
+                           country == "Thailand" ~ "Others",
+                           country == "Tunisia" ~ "Others",
+                           country == "China" ~ "China",
+                           country == "Belgium" ~ "Belgium",
+                           country == "Pakistan" ~ "Pakistan",
+                           country == "France" ~ "France",
+                           country == "Australia" ~ "Australia",
+                           country == "Germany" ~ "Germany",
+                           country == "India" ~ "India",
+                           country == "Canada" ~ "Canada",
+                           country == "USA" ~ "USA",
+                           country == "Reunion" ~ "Reunion"))
+data.1
+```
+
+Plot graph
+```{r}
+plot <- 
+  ggplot(data.1, aes(x = continent, fill= newCountry)) + 
+  geom_bar(color = "#023047", width = 0.5) +
+  xlab("Continent")+
+  ylab("Number of isolates") +
+  theme(axis.title.x = element_text(size = 15, colour = "black", margin = margin(10, 0, 10, 0), face = "bold"),
+        axis.text.x = element_text(size = 15, color = "black",),
+        axis.text.y = element_text(size = 15, color = "black"),
+        axis.title.y = element_text(colour = "black", margin = margin(0, 10, 0, 10)))+
+  scale_fill_manual(values = c("China"="#780000", "Belgium"="#b7e4c7", "Pakistan"="#ff4d6d", 
+                               "France"="#95d5b2", "Germany"="#74c69d", "Australia"="#219ebc",
+                               "India"="#f28482", "Canada"="#e09f3e", "USA"="#ffba08",
+                               "Reunion"="#06d6a0",
+                               na.value = "grey"))+
+  theme_bw() +
+  facet_wrap(~ sample_type)
+plot
+
+ggsave("figure_3b.pdf", plot, width = 8, height = 6)
+```
+
+
+# Figure 4
+
+## 4a - tree
+
+Run rhierbaps
+```{r}
+snp.matrix <- load_fasta("figure_4/core.aln.fasta")
+
+hb.results.2 <- hierBAPS(snp.matrix, max.depth = 2, n.pops = 20, n.extra.rounds = Inf, quiet = TRUE)
+baps_cluster_df <- hb.results.2$partition.df
+# write.csv(baps_cluster_df, "efm_baps_cluster.csv", row.names = FALSE)
+```
+
+Load tree file
+```{r}
+iqtree <- ape::read.tree("figure_4/core.aln.treefile")
+iqtree
+
+# Check tree tips and rhierbaps 
+iqtree$tip.label
+hb.results.2$partition.df$Isolate
+
+hb.results.2$partition.df$Isolate %in% iqtree$tip.label
+iqtree$tip.label %in% hb.results.2$partition.df$Isolate
+
+all(iqtree$tip.label %in% hb.results.2$partition.df$Isolate)
+iqtree$tip.label[!iqtree$tip.label %in% hb.results.2$partition.df$Isolate]
+
+# Plot tree
+tree.3 <- ggtree(iqtree)
+tree.3 <- tree.3 %<+% hb.results.2$partition.df
+tree.3 <- tree.3 + geom_tippoint(size=0.5, aes(color = factor(`level 1`)))
+tree.3
+
+# Load metadata
+sample_data <- read.csv("/Users/jbbeh/Downloads/_VicLRE/figure_4/ggtree_metadata.csv")
+View(sample_data)
+
+# Check whether the Isolate IDs in both files align correctly
+sample_data$ID %in% iqtree$tip.label
+iqtree$tip.label %in% sample_data$ID
+
+#Add root and scale bar
+tree_mid <- midpoint(iqtree)
+tree_mid
+```
+
+Make tree with rhierbaps levels
+```{r}
+tree.3 <- ggtree(tree_mid, branch.length = 0.5) %<+% hb.results.2$partition.df +
+  geom_tippoint(size=0.5, aes(color = factor(`level 1`)))
+tree.3
+
+# Plot tree with metadata
+tree.4 <- tree.3 %<+% sample_data +
+  geom_rootedge(rootedge = 0.0005) +   # add root 
+  geom_treescale(y=20)
+tree.4
+
+# Heatmap 1: MDU
+mdu <- data.frame("MDU" = sample_data[,c("MDU")])
+rownames(mdu) <- sample_data$ID
+
+h1 <- 
+  gheatmap(tree.4, mdu, width = 0.03, color=NULL, offset=0.05,
+           colnames = FALSE) +
+  scale_fill_manual(name = "continent",
+                    values = c("#fb8500","#264653"),
+                    na.value="#264653",  # set colour of NA values
+                    breaks = c("Yes", "No"),
+                    labels = c("Yes", "No")) +
+  theme(legend.position = "right")
+h1
+
+# Heatmap 2: continent
+length(unique(sample_data$continent))
+unique(sample_data$continent) #count total number of continents
+
+continent <- data.frame("continent" = sample_data[,c("continent")])
+rownames(continent) <- sample_data$ID
+
+h2 <- h1 + new_scale_fill()
+h3 <- 
+  gheatmap(h2, continent, width = 0.03, color=NULL, offset=0.07,
+           colnames = FALSE) +
+  scale_fill_manual(name = "continent",
+                    values = c("#f2cc8f","#81b29a","#3d405b","#e07a5f","#fb6f92"),
+                    na.value="grey",  # set colour of NA values
+                    breaks = c("Asia", "Oceania", "South America", "North America", "Europe"),
+                    labels = c("Asia", "Oceania", "South America", "North America", "Europe")) +
+  theme(legend.position = "right")
+h3
+
+# Heatmap 3: sample type
+length(unique(sample_data$sample_type))
+unique(sample_data$sample_type)
+
+sample_data$sample_type <- as.factor(sample_data$sample_type) 
+sample_type <- data.frame("sample_type" = sample_data[,c("sample_type")])
+rownames(sample_type) <- sample_data$ID
+
+h4 <- h3 + new_scale_fill()
+h5 <- 
+  gheatmap(h4, sample_type, width = 0.03, color="white", offset=0.09,
+           colnames = FALSE) +
+  scale_fill_manual(name = "sample type",
+                    values = c("#840032","#002642", "#E59500", "#840032"),
+                    na.value="white",  # set colour of NA values
+                    breaks = c("clinical/human", "animal", "environment","human"),
+                    labels = c("clinical/human", "animal", "environment","human"))
+h5
+
+# Heatmap 4: ST
+## Find top 10 prevalent STs
+result <- sample_data %>%
+  count(ST) %>%
+  arrange(desc(n))
+result
+
+sample_data$ST <- as.factor(sample_data$ST) 
+sample_data$ST[!(sample_data$ST %in% c("80", "117", "22","761", "132", "1421", "17", "32", "156", "324"))] <- 'others'
+ST <- data.frame("ST" = sample_data[,c("ST")])
+rownames(ST) <- sample_data$ID
+
+h6 <- h5 + new_scale_fill()
+h7 <- 
+  gheatmap(h6, ST, width = 0.03, color="white", offset=0.12,
+           colnames = FALSE) +
+  scale_fill_manual(name = "sample type",
+                    values = c("#840032","#002642", "#E59500", "#669bbc", "#588157",
+                               "#ff99c8", "#83c5be", "#9f86c0", "#4361ee", "#f72585"),
+                    na.value="white",  # set colour of NA values
+                    breaks = c("80", "117", "22","761", "132", 
+                               "1421", "17", "32", "156", "324"),
+                    labels = c("80", "117", "22","761", "132", 
+                               "1421", "17", "32", "156", "324"))
+h7
+
+# Heatmap 5: CC
+sample_data$CC <- as.factor(sample_data$CC) 
+CC <- data.frame("CC" = sample_data[,c("CC")])
+rownames(CC) <- sample_data$ID
+unique(sample_data$CC)
+
+h8 <- h7 + new_scale_fill()
+h9 <- 
+  gheatmap(h8, CC, width = 0.03, color=NULL, offset=0.13,
+           colnames = FALSE) +
+  scale_fill_manual(name = "CC",
+                    values = c("red", "white", "white"),
+                    na.value="white",  # set colour of NA values
+                    breaks = c("17", "94", "-"),
+                    labels = c("17", "94", "-"))
+h9
+
+# Heatmap 6: LR gene cfr
+sample_data$cfr <- as.factor(sample_data$cfr) 
+cfr <- data.frame("cfr" = sample_data[,c("cfr")])
+rownames(cfr) <- sample_data$ID
+
+h10 <- h9 + new_scale_fill()
+h11 <- 
+  gheatmap(h10, cfr, width = 0.03, color="white", offset=0.15,
+           colnames = FALSE) +
+  scale_fill_manual(name = "cfr",
+                    values = c("black"),
+                    na.value="white",  # set colour of NA values
+                    breaks = c("yes"),
+                    labels = c("yes"))
+h11
+
+# Heatmap 7: LR gene cfr(B)
+sample_data$cfrB <- as.factor(sample_data$cfrB) 
+cfrB <- data.frame("cfrB" = sample_data[,c("cfrB")])
+rownames(cfrB) <- sample_data$ID
+
+h12 <- h11 + new_scale_fill()
+h13 <- 
+  gheatmap(h12, cfrB, width = 0.03, color="white", offset=0.17,
+           colnames = FALSE) +
+  scale_fill_manual(name = "cfrB",
+                    values = c("black"),
+                    na.value="white",  # set colour of NA values
+                    breaks = c("yes"),
+                    labels = c("yes"))
+h13
+
+# Heatmap 8: LR gene cfr(D)
+sample_data$cfrD <- as.factor(sample_data$cfrD) 
+cfrD <- data.frame("cfrD" = sample_data[,c("cfrD")])
+rownames(cfrD) <- sample_data$ID
+
+h14 <- h13 + new_scale_fill()
+h15 <- 
+  gheatmap(h14, cfrD, width = 0.03, color="white", offset=0.19,
+           colnames = FALSE) +
+  scale_fill_manual(name = "cfrD",
+                    values = c("black"),
+                    na.value="white",  # set colour of NA values
+                    breaks = c("yes"),
+                    labels = c("yes"))
+h15
+
+# Heatmap 9: LR gene optrA
+sample_data$optrA <- as.factor(sample_data$optrA) 
+optrA <- data.frame("optrA" = sample_data[,c("optrA")])
+rownames(optrA) <- sample_data$ID
+
+h16 <- h15 + new_scale_fill()
+h17 <- 
+  gheatmap(h16, optrA, width = 0.03, color="white", offset=0.21,
+           colnames = FALSE) +
+  scale_fill_manual(name = "optrA",
+                    values = c("black"),
+                    na.value="white",  # set colour of NA values
+                    breaks = c("yes"),
+                    labels = c("yes"))
+h17
+
+# Heatmap 10: LR gene poxtA
+sample_data$poxtA <- as.factor(sample_data$poxtA) 
+poxtA <- data.frame("poxtA" = sample_data[,c("poxtA")])
+rownames(poxtA) <- sample_data$ID
+
+h18 <- h17 + new_scale_fill()
+h19 <- 
+  gheatmap(h18, poxtA, width = 0.03, color="white", offset=0.23,
+           colnames = FALSE) +
+  scale_fill_manual(name = "poxtA",
+                    values = c("black"),
+                    na.value="white",  # set colour of NA values
+                    breaks = c("yes"),
+                    labels = c("yes"))
+h19
+
+# Heatmap 11: van type
+sample_data$van_operon <- as.factor(sample_data$van_operon) 
+van_operon <- data.frame("van_operon" = sample_data[,c("van_operon")])
+rownames(van_operon) <- sample_data$ID
+
+h20 <- h19 + new_scale_fill()
+h21 <- 
+  gheatmap(h20, van_operon, width = 0.03, color="white", offset=0.25,
+           colnames = FALSE) +
+  scale_fill_manual(name = "poxtA",
+                    values = c("#1B98E0", "#6E2594", "white", "white"),
+                    na.value="white",  # set colour of NA values
+                    breaks = c("vanA", "vanB", "vanD"),
+                    labels = c("vanA", "vanB", "vanD"))+
+  theme(legend.position = "NULL")
+h21
+
+ggsave("figure_4a.pdf", h21, width=8, height=6)
+```
+
+
+## 4b - barplots
+
+Load data
+```{r}
+data <- read.csv("figure_4/efs-metadata.csv")
+data
+```
+
+Count prevalent countries
+```{r}
+count_country <- 
+  data %>% dplyr::count(country) %>%
+  arrange(desc(n))
+count_country
+```
+
+Then select only the top 10 countries and change others into "Others"
+```{r}
+data.1 <-
+  data %>% 
+  mutate(newCountry = case_when(
+                           country == "Spain" ~ "Others",
+                           country == "United Kingdom" ~ "Others",
+                           country == "Colombia" ~ "Others",
+                           country == "Malaysia" ~ "Others",
+                           country == "Tunisia" ~ "Others",
+                           country == "Brazil" ~ "Others",
+                           country == "Switzerland" ~ "Others",
+                           country == "Denmark" ~ "Others",
+                           country == "Australia" ~ "Others",
+                           country == "Lebanon" ~ "Others",
+                           country == "Bangladesh" ~ "Others",
+                           country == "Pakistan" ~ "Others",
+                           country == "Russia" ~ "Others",
+                           country == "South Africa" ~ "Others",
+                           country == "China" ~ "China",
+                           country == "Belgium" ~ "Belgium",
+                           country == "USA" ~ "USA",
+                           country == "France" ~ "France",
+                           country == "South Korea" ~ "South Korea",
+                           country == "Germany" ~ "Germany",
+                           country == "Portugal" ~ "Portugal",
+                           country == "United Arab Emirates" ~ "United Arab Emirates",
+                           country == "Canada" ~ "Canada",
+                           country == "Italy" ~ "Italy",
+                           country == "Japan" ~ "Japan", ))
+data.1
+```
+
+Plot graph
+```{r}
+plot <- 
+  ggplot(data.1, aes(x = continent, fill= newCountry)) + 
+  geom_bar(color = "#023047", width = 0.5) +
+  xlab("Continent")+
+  ylab("Number of isolates") +
+  theme(axis.title.x = element_text(size = 15, colour = "black", margin = margin(10, 0, 10, 0), face = "bold"),
+        axis.text.x = element_text(size = 15, color = "black",),
+        axis.text.y = element_text(size = 15, color = "black"),
+        axis.title.y = element_text(colour = "black", margin = margin(0, 10, 0, 10)))+
+  scale_fill_manual(values = c("China"="#780000", "Belgium"="#b7e4c7", "USA"="#ffba08", 
+                               "France"="#95d5b2", "South Korea"="#e5989b", "Germany"="#74c69d", 
+                               "Portugal"="#52b788", "United Arab Emirates"="#ef233c", 
+                               "Canada"="#e09f3e", "Italy"="#40916c", "Japan"="#ffcad4",
+                               na.value = "grey"))+
+  theme_bw() +
+  facet_wrap(~ sample_type)
+plot
+
+ggsave("figure_4b.pdf", plot, width = 8, height = 6)
+```
+
+
+# Figure 5
+
+## 5a - efs map
+
+Import data
+```{r}
+data <- read.csv("figure_5/efs_map.csv")
+data
+```
+
+Count the total number of isolates for each country
+```{r}
+country_counts <- data %>% dplyr::count(country)
+typeof(country_counts)
+country_counts <- data.frame(country_counts)
+country_counts
+```
+
+Plot map
+```{r}
+colours <- c("#fcbf49","#faa307","#f48c06","#dc2f02","#d00000") #own colour palette
+colourPalette <- RColorBrewer::brewer.pal(5,'RdPu') # colour palette from RColorBrewer
+
+limits <- range(0, 400)  # custom range
+legend.limits <- seq(min(limits), max(limits), len = 6)  # splitting to make continuous variable
+
+# Make plot
+pdf("plot_v1.pdf", width=80, height=60)
+sPDF <- joinCountryData2Map(country_counts, joinCode='NAME', nameJoinColumn='country')
+map.efs <- 
+  mapCountryData(sPDF, nameColumnToPlot='n', #variable to be plotted
+                 catMethod= legend.limits, #use custom scale
+                 numCats = numCats,
+                 mapTitle = "Global distribution of LR genes in Enterococcus",
+                 missingCountryCol='dark grey', 
+                 colourPalette=colours,
+                 addLegend = TRUE)
+do.call(addMapLegend, c(map.efs, horizontal=TRUE, legendWidth=0.5))
+dev.off()
+```
+
+## 5b - efm map
+
+Import data
+```{r}
+data <- read.csv("figure_5/efm_map.csv")
+data
+```
+
+Count the total number of isolates for each country
+```{r}
+country_counts <- data %>% count(country)
+typeof(country_counts)
+country_counts <- data.frame(country_counts)
+View(country_counts)
+```
+
+Plot map
+```{r}
+colours <- c("#fcbf49","#faa307","#f48c06","#dc2f02","#d00000") #own colour palette
+colourPalette <- RColorBrewer::brewer.pal(5,'RdPu') # colour palette from RColorBrewer
+
+limits <- range(0, 100)  # custom range
+legend.limits <- seq(min(limits), max(limits), len = 6)  # splitting to make continuous variable
+
+# Make plot
+pdf("plot_v1.pdf", width=80, height=60)
+sPDF <- joinCountryData2Map(country_counts, joinCode='NAME', nameJoinColumn='country')
+map.efm <- 
+  mapCountryData(sPDF, nameColumnToPlot='n', #variable to be plotted
+                 catMethod= legend.limits, #use custom scale
+                 numCats = numCats,
+                 mapTitle = "Global distribution of LR genes in Enterococcus",
+                 missingCountryCol='dark grey', 
+                 colourPalette=colours,
+                 addLegend = TRUE)
+do.call(addMapLegend, c(map.efm, horizontal=TRUE, legendWidth=0.5))
+dev.off()
+```
+
+
+# Figure S1
+
+Figure S1 was created manually with Powerpoint.
+
+
+# Figure S2
+
+```{r}
+# Load data
+df <- read.csv("figure_s2/mic_input.csv")
+View(df)
+
+df$LZD_MIC <- as.factor(df$LZD_MIC)
+df$G2576T_copyNumber <- as.factor(df$G2576T_copyNumber)
+
+# Make plot
+plot <- 
+  ggplot(df, aes(x = G2576T_copyNumber, fill= LZD_MIC)) + 
+  geom_bar(color = "#023047", width = 0.5) +
+  xlab("ST")+
+  ylab("Number of isolates") +
+  theme(axis.title.x = element_text(size = 15, colour = "black", margin = margin(10, 0, 10, 0), face = "bold"),
+        axis.text.x = element_text(size = 15, color = "black",),
+        axis.text.y = element_text(size = 15, color = "black"),
+        axis.title.y = element_text(colour = "black", margin = margin(0, 10, 0, 10)))+
+  guides(fill=guide_legend(title="Linezolid MIC"))+
+  scale_fill_manual(values = c("four"="#c1121f", "three"="#f77f00", "two"="#fcbf49", 
+                               na.value = "white"))+
+  theme_bw()
+plot
+
+# Save plot
+ggsave("figure_s2.pdf", plot, width = 4, height = 6)
+```
+
+
+# Figure S3
+
+Load data
+```{r}
+data_efm <- read.csv("/Users/jbbeh/Downloads/_VicLRE/figure_s3/efm-mic-dist.csv")
+data_efs <- read.csv("/Users/jbbeh/Downloads/_VicLRE/figure_s3/efs-mic-dist.csv")
+```
+
+Group data into summary 
+```{r}
+data.1 <- 
+  data_efm %>% 
+  group_by(Year, LZD_susc) %>% 
+  summarise(n = n(), .groups = "drop") %>% 
+  ungroup()
+data.1
+
+data.2 <- 
+  data_efs %>% 
+  group_by(Year, LZD_susc) %>% 
+  summarise(n = n(), .groups = "drop") %>% 
+  ungroup()
+data.2
+
+```
+
+Plot dividing MIC into six categories - <=0.5, 1, 2, 4, 8 and >8
+```{r}
+# Group data into summaries
+data_efm$LZD_MIC <- as.factor(data_efm$LZD_MIC)
+data.1 <- 
+  data_efm %>% 
+  group_by(Year, LZD_MIC) %>% 
+  summarise(n = n(), .groups = "drop") %>% 
+  ungroup()
+data.1
+
+data_efs$LZD_MIC <- as.factor(data_efs$LZD_MIC)
+data.2 <- 
+  data_efs %>% 
+  group_by(Year, LZD_MIC) %>% 
+  summarise(n = n(), .groups = "drop") %>% 
+  ungroup()
+data.2
+
+# E. faecium plot
+desired_order <- c(">8", "8", "4", "2", "1", "<=0.5", "NA")
+data.1$LZD_MIC <- factor(data.1$LZD_MIC, levels = desired_order)
+
+plot.1 <- 
+  data.1 %>% 
+  ggplot(aes(x=Year, y=n, fill=LZD_MIC)) + 
+  geom_col() + 
+  scale_fill_manual(values=c("#9d0208", "#d90429", "#ffb703",  "#90a955", "#4f772d", "#386641", "grey"))+
+  theme_bw()+
+  labs(title=NULL, y="Number of isolates", x="Year") +
+  theme(legend.text = element_text(size = 7)) 
+plot.1
+
+# E. faecalis plot
+desired_order <- c(">8", "8", "4", "2", "1", "<=0.5", "NA")
+data.2$LZD_MIC <- factor(data.2$LZD_MIC, levels = desired_order)
+
+plot.2 <- 
+  data.2 %>% 
+  ggplot(aes(x=Year, y=n, fill=LZD_MIC)) + 
+  geom_col() + 
+  scale_fill_manual(values=c("#9d0208", "#d90429", "#ffb703",  "#90a955", "#4f772d", "#386641", "grey"))+
+  theme_bw()+
+  labs(title=NULL, y="Number of isolates", x="Year") +
+  theme(legend.text = element_text(size = 7)) 
+plot.2
+
+# Joining two plots together (top-bottom)
+combined_plot <- wrap_plots(plot.2, plot.1, nrow = 2)  # arrange top-bottom
+combined_plot
+
+# Save plot
+ggsave("figure_s3.pdf", combined_plot, width=6, height=4, dpi=300)
+```
+
+
+# Figure S6
+
+## 6a
+
+```{r}
+# Set your desired file path
+my_file_path <- "/Users/jbbeh/Library/CloudStorage/OneDrive-TheUniversityofMelbourne/PhD/ANALYSIS/r-plasmapR/Paper1_LRE/DMG2302727_plasmapR/DMG2302727.gbk"
+
+# Assign the file path to the variable
+fl <- my_file_path
+
+# Create plot
+fl |> 
+  read_gb() |> 
+  plot_plasmid(name = "DMG2302727-plasmid")
+```
+
+Access plasmid features 
+```{r}
+plasmid <- fl |> 
+  read_gb()
+
+dat <- plasmid |> 
+  as.data.frame()
+dat
+
+# Make plot from data frame 
+dat[dat$type == "CDS", ] |> 
+  plot_plasmid(name = "my_plasmid")
+```
+
+Rename CDS based on Bakta GFF3 output
+```{r}
+#sample code
+dat[dat == "DJGJNLLM_00006"] <- "repB" #rename 'DJGJNLLM_00006' as 'repB' gene
+dat[dat == "DJGJNLLM_00009"] <- "relaxase"
+dat[dat == "DJGJNLLM_00010"] <- "MobC"
+dat[dat == "yxdl"] <- "ABC transporter ATP-binding protein yxdl"
+dat[dat == "stp"] <- "fexB"
+dat[dat == "DJGJNLLM_00031"] <- "Conjugal transfer protein"
+
+View(dat)
+```
+
+Add new row of data/genes
+```{r}
+# Create a new row of data
+new_row <- data.frame(index = 34, name = "ori", type = "CDS", start = 3487, end = 4337, direction = 1)
+# Add the new row to the data frame using rbind()
+dat <- rbind(dat, new_row)
+
+new_row_2 <- data.frame(index = 35, name = "Type I toxin-antitoxin system", type = "CDS", start = 4131, end = 4217, direction = 1)
+dat <- rbind(dat, new_row_2)
+
+new_row_3 <- data.frame(index = 36, name = "IS6 family transposase", type = "CDS", start = 9394, end = 10080, direction = 1)
+dat <- rbind(dat, new_row_3)
+
+new_row_4 <- data.frame(index = 37, name = "IS1216 transposase", type = "CDS", start = 14105, end = 14791, direction = 1)
+dat <- rbind(dat, new_row_4)
+
+new_row_5 <- data.frame(index = 38, name = "IS1216 transposase", type = "CDS", start = 17426, end = 18112, direction = 1)
+dat <- rbind(dat, new_row_5)
+
+new_row_6 <- data.frame(index = 39, name = "IS1216 transposase", type = "CDS", start = 21023, end = 21709, direction = -1)
+dat <- rbind(dat, new_row_6)
+
+new_row_7 <- data.frame(index = 40, name = "IS1216 transposase", type = "CDS", start = 22970, end = 23656, direction = 1)
+dat <- rbind(dat, new_row_7)
+
+View(dat)
+```
+
+Remove all unnamed CDS
+```{r}
+filtered_dat <- dat[!grepl("^DJGJNLLM", dat$name), ]  # remove all gene names that start with DJGJNLLM
+filtered_dat
+
+plasmid <- 
+  plot_plasmid(filtered_dat, name = "my_plasmid_2")
+plasmid
+```
+
+Save plot
+```{r}
+ggsave(filename = "figure_s6a.pdf", plot = plasmid, width = 6, height = 4, dpi = 300)
+```
+
+## s6b
+
+Create plot
+```{r}
+# Set your desired file path
+my_file_path <- "figure_s6/DMG2302731.gbk"
+
+# Assign the file path to the variable
+fl <- my_file_path
+
+#Create plot
+fl |> 
+  read_gb() |> 
+  plot_plasmid(name = "DMG2302731-plasmid")
+```
+
+Access plasmid features 
+```{r}
+plasmid <- fl |> 
+  read_gb()
+
+dat <- plasmid |> 
+  as.data.frame()
+
+# Make plot from data frame 
+dat[dat$type == "CDS", ] |> 
+  plot_plasmid(name = "my_plasmid")
+```
+
+Rename CDS based on Bakta GFF3 output
+```{r}
+#sample code
+dat[dat == "OEHAJAJD_00016"] <- "Conjugal transfer protein TraF" #rename 'OEHAJAJD_00016'
+dat[dat == "OEHAJAJD_00020"] <- "Conjugal transfer protein" 
+dat[dat == "OEHAJAJD_00029"] <- "IS1216 transposase" 
+dat[dat == "OEHAJAJD_00031"] <- "transposase" 
+dat[dat == "OEHAJAJD_00036"] <- "IS30 family transposase" 
+dat[dat == "OEHAJAJD_00037"] <- "IS21-like element" 
+dat[dat == "ble"] <- "bleO" 
+dat[dat == "OEHAJAJD_00040"] <- "TnpA transposase" 
+dat[dat == "OEHAJAJD_00045"] <- "IS1216 transposase" 
+dat[dat == "OEHAJAJD_00049"] <- "IS1216 transposase" 
+dat[dat == "OEHAJAJD_00056"] <- "IS1216 transposase" 
+dat[dat == "OEHAJAJD_00063"] <- "RepR" 
+dat[dat == "erm_1"] <- "erm(B)" 
+dat[dat == "OEHAJAJD_00074"] <- "ISL3-like element" 
+
+View(dat)
+```
+
+Add new row of data/genes
+```{r}
+# Create a new row of data
+new_row <- data.frame(index = 80, name = "ori", type = "CDS", start = 4490, end = 4536, direction = 1)
+# Add the new row to the data frame using rbind()
+dat <- rbind(dat, new_row)
+
+new_row_2 <- data.frame(index = 81, name = "mobA", type = "CDS", start = 5024, end = 7009, direction = 1)
+dat <- rbind(dat, new_row_2)
+
+new_row_3 <- data.frame(index = 82, name = "erm(C)", type = "CDS", start = 62757, end = 62840, direction = 1)
+dat <- rbind(dat, new_row_3)
+
+new_row_4 <- data.frame(index = 83, name = "erm(C)", type = "CDS", start = 70473, end = 70541, direction = 1)
+dat <- rbind(dat, new_row_4)
+
+new_row_5 <- data.frame(index = 84, name = "erm(B)", type = "CDS", start = 70666, end = 71403, direction = 1)
+dat <- rbind(dat, new_row_5)
+
+View(dat)
+```
+
+Remove unwanted rows
+```{r}
+dat[-3, ] 
+```
+
+Remove all unnamed CDS
+```{r}
+filtered_dat <- dat[!grepl("^OEHAJAJD", dat$name), ]  #remove all gene names that start with OEHAJAJD
+filtered_dat
+
+plasmid <- 
+  plot_plasmid(filtered_dat, name = "my_plasmid_2")
+plasmid
+```
+
+Save plot
+```{r}
+ggsave(filename = "figure_s6b.pdf", plot = plasmid, width = 6, height = 4, dpi = 300)
+```
+
