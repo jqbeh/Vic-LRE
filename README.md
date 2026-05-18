@@ -6,3 +6,6 @@ All codes used to run bioinformatic analyses are included in the analysis.Rmd sc
 
 # Visualisation
 All visualisation codes to generate figures in the manuscript are included in the visualisation.Rmd script.
+
+# Directories
+Paths to directories that contain input sequences on MDU PHL server.
