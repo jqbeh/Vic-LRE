@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-# APG One Health Enterococcus manuscript - analysis
+# Victoria LRE manuscript - analysis
 
 This document contains all R packages and codes used in the bioinformatic analyses of the manuscript 'Genomics to understand the global landscape of linezolid resistance in Enterococcus faecium and Enterococcus faecalis'.
 
