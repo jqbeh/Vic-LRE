@@ -9,7 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# APG One Health Enterococcus manuscript - visualisation
+# Victoria LRE manuscript - visualisation
 
 This document contains all R packages and codes used to create the figures in the manuscript 'Prospective sampling reveals sharing of antimicrobial resistance genes in Enterococcus across One Health compartments'.
 
