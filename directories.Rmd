@@ -1,0 +1,39 @@
+---
+title: "Vic LRE manuscript"
+author: "Jia Qi Beh"
+date: "2026-05-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# APG One Health Enterococcus manuscript - data
+
+This document contains all paths to MDU server directories that contain the input sequences for the manuscript 'Genomics to understand the global landscape of linezolid resistance in Enterococcus faecium and Enterococcus faecalis'.
+
+
+# NCBI genomes
+
+Enterococcus faecium (n=324) = /home/jbbeh/BACKUP/Paper1_LRE/global_LREfm_assemblies_324
+Enterococcus faecalis (n=684) = /home/jbbeh/BACKUP/Paper1_LRE/global_LREfs_assemblies_684
+
+
+# MDU genomes
+
+## Illumina assemblies
+
+Enterococcus faecium = /home/jbbeh/BACKUP/Paper1_LRE/all_efm_shortReadsOnly_assemblies_379
+Enterococcus faecalis = /home/jbbeh/BACKUP/Paper1_LRE/all_efs_shortReadsOnly_assemblies_47
+
+## Hybrid assemblies
+
+All assemblies = /home/jbbeh/BACKUP/Paper1_LRE/all_EfmEfs_hybridAssemblies_21
+
+## Raw reads
+
+All Enterococcus from 2022 = /home/jbbeh/BACKUP/Paper1_LRE/mdu_enterococcus_2022/untrimmed_fastq
+All Enterococcus from 2023 = /home/jbbeh/BACKUP/Paper1_LRE/mdu_enterococcus_2023/untrimmed_fastq
+
