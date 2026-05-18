@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-# APG One Health Enterococcus manuscript - data
+# Victoria LRE manuscript - data
 
 This document contains all paths to MDU server directories that contain the input sequences for the manuscript 'Genomics to understand the global landscape of linezolid resistance in Enterococcus faecium and Enterococcus faecalis'.
 
