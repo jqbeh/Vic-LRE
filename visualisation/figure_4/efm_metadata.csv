@@ -1,0 +1,325 @@
+﻿ID,MDU,ST,CC,clade,country,continent,year,sample_type,lzd_genotype,van_operon,cfr,cfrB,cfrD,optrA,poxtA
+GCA_004332055.1,No,32,17,,USA,North America,2016,nonclinical,"cfr, optrA",,yes,,,yes,
+GCA_015642685.1,No,22,17,,Denmark,Europe,2019,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_019175425.1,No,957,,,Switzerland,Europe,2019,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_019175445.1,No,-,,,Switzerland,Europe,2019,nonclinical,optrA,-,,,,yes,
+GCA_019175525.1,No,25,17,,Switzerland,Europe,2019,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_019992835.1,No,156,,,China,Asia,2017,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_021122265.1,No,56,17,,Belgium,Europe,2019,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_021122645.1,No,-,,,Belgium,Europe,2018,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_021123005.1,No,-,,,Belgium,Europe,2018,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_021123525.1,No,137,,,Belgium,Europe,2019,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_021124145.1,No,1146,,,Belgium,Europe,2020,nonclinical,optrA,-,,,,yes,
+GCA_023182815.2,No,22,17,,China,Asia,2021,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_023182835.2,No,56,17,,China,Asia,2019,nonclinical,optrA,-,,,,yes,
+GCA_025515395.1,No,124,,,South Korea,Asia,2019,nonclinical,optrA,-,,,,yes,
+GCA_025753055.1,No,636,,,China,Asia,2021,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_025753175.1,No,324,17,,China,Asia,2014,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_025753655.1,No,1630,,,China,Asia,2018,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_026202455.1,No,323,17,,China,Asia,2019,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_026203285.1,No,-,,,China,Asia,2020,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_026203655.1,No,-,,,China,Asia,2020,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_026204135.1,No,-,,,China,Asia,2021,nonclinical,optrA,-,,,,yes,
+GCA_028891525.1,No,-,,,China,Asia,2021,nonclinical,optrA,-,,,,yes,
+GCA_030064735.1,No,-,,,China,Asia,2021,nonclinical,optrA,-,,,,yes,
+GCA_030179115.1,No,-,,,China,Asia,2021,nonclinical,optrA,-,,,,yes,
+GCA_030179135.1,No,-,,,China,Asia,2021,nonclinical,optrA,-,,,,yes,
+GCA_030179235.1,No,-,,,China,Asia,2021,nonclinical,optrA,-,,,,yes,
+GCA_030179285.1,No,-,,,China,Asia,2021,nonclinical,optrA,-,,,,yes,
+GCA_030179505.1,No,29,17,,China,Asia,2021,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_007923785.2,No,1126,,,China,Asia,2017,nonclinical,poxtA,-,,,,,yes
+GCA_007923865.2,No,-,,,China,Asia,2017,nonclinical,poxtA,-,,,,,yes
+GCA_007923885.2,No,156,,,China,Asia,2017,nonclinical,poxtA,-,,,,,yes
+GCA_007923905.2,No,97,,,China,Asia,2017,nonclinical,poxtA,-,,,,,yes
+GCA_007923925.2,No,1660,,,China,Asia,2017,nonclinical,poxtA,-,,,,,yes
+GCA_007923945.2,No,22,17,,China,Asia,2017,nonclinical,poxtA,-,,,,,yes
+GCA_007923965.2,No,22,17,,China,Asia,2017,nonclinical,poxtA,-,,,,,yes
+GCA_013326855.1,No,-,,,Canada,North America,2014,nonclinical,poxtA,-,,,,,yes
+GCA_018279145.1,No,32,17,,China,Asia,2019,nonclinical,poxtA,-,,,,,yes
+GCA_019992725.1,No,-,,,China,Asia,2018,nonclinical,poxtA,-,,,,,yes
+GCA_019992765.1,No,-,,,China,Asia,2018,nonclinical,poxtA,-,,,,,yes
+GCA_019992825.1,No,156,,,China,Asia,2018,nonclinical,poxtA,-,,,,,yes
+GCA_019992865.1,No,156,,,China,Asia,2018,nonclinical,poxtA,-,,,,,yes
+GCA_023375225.1,No,416,,,,,2021,nonclinical,poxtA,-,,,,,yes
+GCA_025847705.1,No,324,17,,China,Asia,2021,nonclinical,poxtA,-,,,,,yes
+GCA_029319235.1,No,32,17,,USA,North America,2018,nonclinical,poxtA,-,,,,,yes
+GCA_029320745.1,No,32,17,,USA,North America,2018,nonclinical,poxtA,-,,,,,yes
+SRR14024963,No,32,17,,Canada,North America,2015,nonclinical,"cfr, optrA",,yes,,,yes,
+SRR14024972,No,-,,,Canada,North America,2015,nonclinical,"optrA, poxtA",,,,,yes,yes
+SRR14024974,No,-,,,Canada,North America,2015,nonclinical,optrA,,,,,yes,
+SRR14024975,No,944,,,Canada,North America,2015,nonclinical,optrA,,,,,yes,
+SRR14024978,No,-,,,Canada,North America,2016,nonclinical,"optrA, poxtA",,,,,yes,yes
+SRR14024984,No,-,,,Canada,North America,2015,nonclinical,"optrA, poxtA",,,,,yes,yes
+SRR14024990,No,-,,,Canada,North America,2015,nonclinical,"optrA, poxtA",,,,,yes,yes
+SRR14026508,No,212,,,Canada,North America,2015,nonclinical,optrA,,,,,yes,
+SRR16631799,No,137,,,Spain,Europe,2018,nonclinical,poxtA,,,,,,yes
+SRR21102102,No,1641,17,,Belgium,Europe,2019,nonclinical,poxtA,,,,,,yes
+SRR21102107,No,104,,,Belgium,Europe,2020,nonclinical,"optrA, poxtA",,,,,yes,yes
+SRR21102110,No,1628,17,,Belgium,Europe,2020,nonclinical,"optrA, poxtA",,,,,yes,yes
+SRR21102114,No,420,,,Belgium,Europe,2020,nonclinical,poxtA,,,,,,yes
+SRR21102115,No,22,17,,Belgium,Europe,2020,nonclinical,"optrA, poxtA",,,,,yes,yes
+SRR21102123,No,22,17,,Belgium,Europe,2019,nonclinical,"optrA, poxtA",,,,,yes,yes
+SRR21102125,No,324,17,,Belgium,Europe,2019,nonclinical,"optrA, poxtA",,,,,yes,yes
+SRR21102130,No,22,17,,Belgium,Europe,2019,nonclinical,"optrA, poxtA",,,,,yes,yes
+SRR21102131,No,55,17,,Belgium,Europe,2019,nonclinical,"optrA, poxtA",,,,,yes,yes
+SRR14024983,No,1532,-,,Canada,North America,2014,nonclinical,poxtA,,,,,,yes
+SRR14025000,No,-,-,,Canada,North America,2014,nonclinical,poxtA,,,,,,yes
+GCA_002973755.2,No,17,17,A1,France,Europe,2015,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_012932975.2,No,80,17,A1,India,Asia,2018,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_012932985.2,No,80,17,A1,India,Asia,2017,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_012933185.1,No,80,17,A1,India,Asia,2019,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_014489995.1,No,203,17,A1,Germany,Europe,2016,clinical,cfr(B),,,yes,,,
+GCA_014490015.1,No,203,17,A1,Germany,Europe,2016,clinical,cfr(B),vanA,,yes,,,
+GCA_015361995.1,No,80,17,A1,Germany,Europe,2016,clinical,"cfr(D), optrA",,,,yes,yes,
+GCA_015362245.1,No,80,17,A1,Germany,Europe,2016,clinical,"cfr(D), optrA",,,,yes,yes,
+GCA_015402705.1,No,80,17,A1,USA,North America,2015,clinical,cfr(B),vanA,,yes,,,
+GCA_015409415.1,No,117,17,A1,Australia,Oceania,2015,clinical,cfr(D),vanB,,,yes,,
+GCA_015457725.1,No,17,17,A1,Denmark,Europe,2015,clinical,cfr,vanA,yes,,,,
+GCA_017101495.1,No,1421,17,,Australia,Oceania,2018,clinical,cfr(B),vanA,,yes,,,
+GCA_017664195.1,No,1421,17,,Australia,Oceania,2017,clinical,cfr(B),vanA,,yes,,,
+GCA_017815695.1,No,80,17,A1,India,Asia,2019,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_020163015.1,No,896,,,Brazil,South America,2016,clinical,cfr(B),vanA,,yes,,,
+GCA_020927235.1,No,18,17,A1,USA,North America,2016,clinical,cfr(B),vanA,,yes,,,
+GCA_021311095.1,No,761,17,,Reunion,Europe,2019,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_021311125.1,No,761,17,,Reunion,Europe,2019,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_021311135.1,No,761,17,,Reunion,Europe,2018,clinical,cfr(D),vanA,,,yes,,
+GCA_021311175.1,No,761,17,,Reunion,Europe,2019,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_021311275.1,No,761,17,,Reunion,Europe,2019,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_021311315.1,No,761,17,,Reunion,Europe,2019,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_021311335.1,No,761,17,,Reunion,Europe,2019,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_021311495.1,No,761,17,,Reunion,Europe,2019,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_021420065.1,No,117,17,A1,Germany,Europe,2020,clinical,cfr(B),vanB,,yes,,,
+GCA_021471745.1,No,117,17,A1,Germany,Europe,2017,clinical,cfr(B),vanB,,yes,,,
+GCA_025477655.1,No,761,17,,Reunion,Europe,2022,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_025477735.1,No,,,,France,Europe,2021,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_025477945.1,No,80,17,A1,France,Europe,2020,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_025478095.1,No,80,17,A1,France,Europe,2019,clinical,cfr(D),vanA,,,yes,,
+GCA_025478555.1,No,761,17,,Reunion,Europe,2018,clinical,cfr(D),vanA,,,yes,,
+GCA_025479745.1,No,117,17,A1,France,Europe,2018,clinical,cfr(D),vanA,,,yes,,
+GCA_025953925.1,No,80,17,A1,India,Asia,2017,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_025953965.1,No,80,17,A1,India,Asia,2019,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_025960185.1,No,80,17,A1,India,Asia,2018,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+GCA_025973165.1,No,1421,17,,Australia,Oceania,2019,clinical,cfr(B),vanA,,yes,,,
+GCA_025983725.1,No,1421,17,,Australia,Oceania,2018,clinical,cfr(B),vanA,,yes,,,
+GCA_026942205.1,No,1350,17,,Belgium,Europe,2017,clinical,cfr(B),vanA,,yes,,,
+GCA_027790995.1,No,1421,17,,Australia,Oceania,2018,clinical,cfr(B),vanA,,yes,,,
+GCA_028768695.1,No,203,17,A1,Denmark,Europe,2021,clinical,cfr(B),,,yes,,,
+GCA_002973675.1,No,650,,,France,Europe,2016,clinical,optrA,,,,,yes,
+GCA_002973715.1,No,80,17,A1,France,Europe,2015,clinical,optrA,vanA,,,,yes,
+GCA_004103165.1,No,195,,,China,Asia,2017,clinical,optrA,,,,,yes,
+GCA_005517315.1,No,80,17,A1,India,Asia,2019,clinical,optrA,vanA,,,,yes,
+GCA_005576735.1,No,17,17,A1,India,Asia,2019,clinical,optrA,,,,,yes,
+GCA_018517065.1,No,324,17,,France,Europe,2017,clinical,"optrA, poxtA",,,,,yes,yes
+GCA_018517085.1,No,650,,,France,Europe,2016,clinical,"optrA, poxtA",,,,,yes,yes
+GCA_019356355.1,No,,,,China,Asia,2018,clinical,"optrA, poxtA",,,,,yes,yes
+GCA_019731315.1,No,1577,,,China,Asia,2020,clinical,"optrA, poxtA",,,,,yes,yes
+GCA_021311015.1,No,80,17,A1,Reunion,Europe,2017,clinical,optrA,vanA,,,,yes,
+GCA_025476665.1,No,868,,,France,Europe,2020,clinical,"optrA, poxtA",vanD,,,,yes,yes
+GCA_025476955.1,No,,,,France,Europe,2020,clinical,optrA,vanA,,,,yes,
+GCA_025477335.1,No,97,,,France,Europe,2019,clinical,"optrA, poxtA",,,,,yes,yes
+GCA_025477835.1,No,269,17,,France,Europe,2019,clinical,optrA,,,,,yes,
+GCA_025481835.1,No,80,17,A1,Reunion,Europe,2017,clinical,optrA,vanA,,,,yes,
+GCA_025481845.1,No,324,17,,France,Europe,2017,clinical,"optrA, poxtA",,,,,yes,yes
+GCA_025629065.1,No,533,17,,China,Asia,2021,clinical,optrA,,,,,yes,
+GCA_028784175.1,No,262,17,,Denmark,Europe,2020,clinical,"optrA, poxtA",,,,,yes,yes
+GCA_030340025.1,No,1263,17,,South Korea,Asia,2019,clinical,optrA,,,,,yes,
+GCA_030340045.1,No,80,17,A1,South Korea,Asia,2019,clinical,optrA,,,,,yes,
+GCA_009707525.1,No,202,17,,Portugal,Europe,2015,clinical,poxtA,,,,,,yes
+GCA_018516845.1,No,612,17,,France,Europe,2018,clinical,poxtA,,,,,,yes
+GCA_018516925.1,No,202,17,,France,Europe,2018,clinical,poxtA,vanA,,,,,yes
+GCA_018517045.1,No,80,17,A1,France,Europe,2017,clinical,poxtA,,,,,,yes
+GCA_018517105.1,No,80,17,A1,France,Europe,2016,clinical,poxtA,vanB,,,,,yes
+GCA_018517185.1,No,,,,France,Europe,2018,clinical,poxtA,,,,,,yes
+GCA_021320335.1,No,,,,Ireland,Europe,2018,clinical,poxtA,vanA,,,,,yes
+GCA_021331195.1,No,,,,Ireland,Europe,2019,clinical,poxtA,vanA,,,,,yes
+GCA_021332155.1,No,202,17,,Ireland,Europe,2018,clinical,poxtA,vanA,,,,,yes
+GCA_021332575.1,No,202,17,,Ireland,Europe,2018,clinical,poxtA,vanA,,,,,yes
+GCA_021338915.1,No,80,17,A1,Ireland,Europe,2019,clinical,poxtA,vanA,,,,,yes
+GCA_021418945.1,No,1676,,,Germany,Europe,2020,clinical,poxtA,,,,,,yes
+GCA_021418965.1,No,168,17,,Germany,Europe,2020,clinical,poxtA,,,,,,yes
+GCA_022426705.1,No,168,17,,China,Asia,2017,clinical,poxtA,,,,,,yes
+GCA_025477065.1,No,1058,,,France,Europe,2020,clinical,poxtA,,,,,,yes
+GCA_025477585.1,No,1676,,,France,Europe,2019,clinical,poxtA,vanD,,,,,yes
+GCA_025478015.1,No,80,17,A1,France,Europe,2019,clinical,poxtA,,,,,,yes
+GCA_025478225.1,No,168,17,,France,Europe,2018,clinical,poxtA,,,,,,yes
+GCA_025478705.1,No,323,17,,France,Europe,2018,clinical,poxtA,,,,,,yes
+GCA_025479445.1,No,1586,17,,France,Europe,2018,clinical,poxtA,,,,,,yes
+GCA_025481715.1,No,,,,France,Europe,2017,clinical,poxtA,,,,,,yes
+GCA_030340165.1,No,80,17,A1,South Korea,Asia,2019,clinical,"cfr(D), poxtA",vanA,,,yes,,yes
+GCA_030340365.1,No,80,17,A1,South Korea,Asia,2019,clinical,"cfr(D), poxtA",vanA,,,yes,,yes
+GCA_030340395.1,No,80,17,A1,South Korea,Asia,2019,clinical,"cfr(D), poxtA",vanA,,,yes,,yes
+GCA_947051815.1,No,121,17,,France,Europe,2021,clinical,poxtA,,,,,,yes
+SRR10094570,No,,,,Pakistan,Asia,2016,clinical,cfr(D),vanA,,,yes,,
+SRR10094571,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), poxtA",vanA,,,yes,,yes
+SRR10094574,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094578,No,132,17,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094580,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094581,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094582,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094586,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094587,No,,,,Pakistan,Asia,2016,clinical,cfr(D),vanA,,,yes,,
+SRR10094588,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), poxtA",vanA,,,yes,,yes
+SRR10094589,No,132,17,,Pakistan,Asia,2016,clinical,"optrA, poxtA",vanA,,,,yes,yes
+SRR10094591,No,,,,Pakistan,Asia,2016,clinical,cfr(D),vanA,,,yes,,
+SRR10094593,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), poxtA",vanA,,,yes,,yes
+SRR10094596,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), poxtA",vanA,,,yes,,yes
+SRR10094597,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+SRR10094598,No,132,17,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094599,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094600,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094601,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094602,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094603,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094604,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094605,No,132,17,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094607,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094608,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), poxtA",vanA,,,yes,,yes
+SRR10094609,No,80,17,A1,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094610,No,132,17,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094612,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+SRR10094613,No,132,17,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094614,No,132,17,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094619,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094620,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10094621,No,,,,Pakistan,Asia,2016,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR10123248,No,80,17,A1,Qatar,Asia,2018,clinical,cfr(D),vanA,,,yes,,
+SRR10123251,No,117,17,A1,Qatar,Asia,2018,clinical,cfr(D),vanA,,,yes,,
+SRR10276527,No,872,17,,Australia,Oceania,2019,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+SRR10694396,No,117,17,A1,Germany,Europe,2015,clinical,cfr(B),vanB,,yes,,,
+SRR11730539,No,,,,Germany,Europe,2017,clinical,cfr(B),vanB,,yes,,,
+SRR13009678,No,117,17,A1,Czech Republic,Europe,2017,clinical,cfr(B),vanA,,yes,,,
+SRR13080468,No,202,17,,Belgium,Europe,2018,clinical,optrA,,,,,yes,
+SRR13480558,No,117,17,A1,Germany,Europe,2018,clinical,poxtA,vanB,,,,,yes
+SRR13480564,No,117,17,A1,Germany,Europe,2017,clinical,poxtA,vanB,,,,,yes
+SRR13902732,No,80,17,A1,India,Asia,2019,clinical,optrA,,,,,yes,
+SRR13902733,No,1380,17,,India,Asia,2020,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+SRR13902734,No,80,17,A1,India,Asia,2019,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+SRR13984233,No,18,17,A1,Denmark,Europe,2017,clinical,cfr(D),vanB,,,yes,,
+SRR13984403,No,117,17,A1,Denmark,Europe,2016,clinical,cfr(D),vanA,,,yes,,
+SRR14889759,No,132,17,,Denmark,Europe,2018,clinical,"cfr(D), optrA, poxtA",vanA,,,yes,yes,yes
+SRR15186232,No,787,17,,Ireland,Europe,2018,clinical,cfr(B),vanA,,yes,,,
+SRR15186539,No,323,17,,Ireland,Europe,2019,clinical,"cfr(D), poxtA",vanA,,,yes,,yes
+SRR16347149,No,56,17,,USA,North America,2018,clinical,poxtA,,,,,,yes
+SRR16347286,No,18,17,A1,USA,North America,2016,clinical,cfr(B),vanA,,yes,,,
+SRR16608738,No,80,17,A1,Denmark,Europe,2017,clinical,cfr(D),vanA,,,yes,,
+SRR19369843,No,,,,Thailand,Asia,2018,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+SRR19441643,No,17,17,A1,Australia,Oceania,2019,clinical,cfr(D),vanA,,,yes,,
+SRR19441646,No,,,,Australia,Oceania,2019,clinical,cfr(D),vanA,,,yes,,
+SRR19441695,No,262,17,,Australia,Oceania,2019,clinical,cfr(D),vanA,,,yes,,
+SRR19441759,No,761,17,,Australia,Oceania,2019,clinical,cfr(D),vanA,,,yes,,
+SRR19441797,No,,,,Australia,Oceania,2019,clinical,cfr(D),vanA,,,yes,,
+SRR19441844,No,761,17,,Australia,Oceania,2019,clinical,cfr(D),vanA,,,yes,,
+SRR19441872,No,262,17,,Australia,Oceania,2019,clinical,cfr(D),vanA,,,yes,,
+SRR19441906,No,17,17,A1,Australia,Oceania,2019,clinical,cfr(D),vanA,,,yes,,
+SRR19441990,No,80,17,A1,Australia,Oceania,2019,clinical,cfr(D),vanA,,,yes,,
+SRR19442658,No,80,17,A1,Australia,Oceania,2019,clinical,cfr(D),vanA,,,yes,,
+SRR19442795,No,,,,Australia,Oceania,2019,clinical,cfr(D),vanA,,,yes,,
+SRR23047320,No,,,,India,Asia,2021,clinical,cfr(D),vanA,,,yes,,
+SRR23047321,No,18,17,A1,India,Asia,2021,clinical,cfr(D),vanA,,,yes,,
+SRR23047323,No,80,17,A1,India,Asia,2021,clinical,cfr(D),vanA,,,yes,,
+SRR23047324,No,117,17,A1,India,Asia,2021,clinical,cfr(D),vanA,,,yes,,
+SRR23047325,No,80,17,A1,India,Asia,2021,clinical,"cfr(D), optrA",vanA,,,yes,yes,
+SRR3870891,No,117,17,A1,Germany,Europe,2015,clinical,cfr(B),vanA,,yes,,,
+SRR6195412,No,80,17,A1,Australia,Oceania,2016,clinical,cfr(D),vanA,,,yes,,
+GCA_016743855.1,No,868,,,China,Asia,2020,nonclinical,optrA,-,,,,yes,
+GCA_021122225.1,No,104,,,Belgium,Europe,2020,nonclinical,optrA,-,,,,yes,
+GCA_021123205.1,No,-,,,Belgium,Europe,2022,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_025753015.1,No,650,,,China,Asia,2020,nonclinical,optrA,-,,,,yes,
+GCA_027944535.1,No,158,,,China,Asia,2020,nonclinical,"optrA, poxtA",-,,,,yes,yes
+GCA_030179335.1,No,-,,,China,Asia,2021,nonclinical,optrA,-,,,,yes,
+GCA_030179465.1,No,1507,,,China,Asia,2020,nonclinical,optrA,-,,,,yes,
+GCA_019175465.1,No,22,17,,Switzerland,Europe,2020,nonclinical,poxtA,-,,,,,yes
+SRR10040956,No,1535,,,Australia,Oceania,2016,clinical,poxtA,,,,,,yes
+SRR11910990,No,203,17,,Germany,Europe,2016,clinical,cfr(B),vanB,,yes,,,
+SRR11911039,No,117,17,,Germany,Europe,2016,clinical,cfr(B),vanB,,yes,,,
+SRR16866653,No,17,17,,USA,North America,2016,clinical,cfr(B),vanA,,yes,,,
+SRR16866735,No,17,17,,USA,North America,2016,clinical,cfr(B),vanA,,yes,,,
+SRR16866782,No,736,17,,USA,North America,2016,clinical,cfr(C),vanA,,,,,
+SRR16866792,No,736,17,,USA,North America,2016,clinical,cfr(C),vanA,,,,,
+SRR16917000,No,80,17,,USA,North America,2018,clinical,cfr(B),vanA,,yes,,,
+SRR20936700,No,117,17,,Germany,Europe,2018,clinical,cfr(B),vanB,,yes,,,
+SRR16866838,No,-,-,,USA,North America,2013,clinical,poxtA,,,,,,yes
+SRR16866849,No,-,-,,USA,North America,2014,clinical,poxtA,,,,,,yes
+SRR17609593,No,32,17,,Portugal,Europe,2001,clinical,poxtA,,,,,,yes
+SRR6456334,No,168,17,,Germany,Europe,2013,clinical,poxtA,,,,,,yes
+SRR6456336,No,30,,,Germany,Europe,2012,clinical,poxtA,,,,,,yes
+SRR6456337,No,273,,,Germany,Europe,2014,clinical,poxtA,,,,,,yes
+SRR6456344,No,650,,,Germany,Europe,2009,clinical,poxtA,,,,,,yes
+GCA_023299805.1,No,-,,,,,2022,,"cfr(D), optrA",,,,yes,yes,
+GCA_025998395.1,No,117,17,,Vietnam,Asia,2021,,cfr(D),vanA,,,yes,,
+GCA_026012595.1,No,117,17,,Vietnam,Asia,2021,,cfr(D),vanA,,,yes,,
+GCA_900639575.1,No,203,17,,Netherlands,Europe,2014,,cfr(D),vanA,,,yes,,
+GCA_900639585.1,No,80,17,,Netherlands,Europe,2013,,cfr(B),vanB,,yes,,,
+GCA_013326905.1,No,1532,,,Canada,North America,2019,,optrA,-,,,,yes,
+GCA_019992745.1,No,-,,,China,Asia,2019,,optrA,-,,,,yes,
+GCA_019992785.1,No,156,,,China,Asia,2020,,"optrA, poxtA",-,,,,yes,yes
+GCA_019992805.1,No,156,,,China,Asia,2021,,optrA,-,,,,yes,
+GCA_021121175.1,No,22,17,,Belgium,Europe,2012,,"optrA, poxtA",-,,,,yes,yes
+GCA_021121205.1,No,8,,,Belgium,Europe,2019,,optrA,-,,,,yes,
+GCA_021121275.1,No,22,17,,Belgium,Europe,2019,,"optrA, poxtA",-,,,,yes,yes
+GCA_021121395.1,No,22,17,,Belgium,Europe,2019,,"optrA, poxtA",-,,,,yes,yes
+GCA_021121485.1,No,26,17,,Belgium,Europe,2019,,"optrA, poxtA",-,,,,yes,yes
+GCA_021122055.1,No,22,17,,Belgium,Europe,2019,,"optrA, poxtA",-,,,,yes,yes
+GCA_021122155.1,No,32,17,,Belgium,Europe,2018,,optrA,-,,,,yes,
+GCA_021122345.1,No,18,17,,Belgium,Europe,2019,,optrA,-,,,,yes,
+GCA_021122385.1,No,324,17,,Belgium,Europe,2018,,"optrA, poxtA",-,,,,yes,yes
+GCA_021122425.1,No,22,17,,Belgium,Europe,2019,,"optrA, poxtA",-,,,,yes,yes
+GCA_021122445.1,No,957,,,Belgium,Europe,2020,,"optrA, poxtA",-,,,,yes,yes
+GCA_021122785.1,No,140,,,Belgium,Europe,2019,,"optrA, poxtA",-,,,,yes,yes
+GCA_021122825.1,No,133,,,Belgium,Europe,2016,,optrA,-,,,,yes,
+GCA_021122985.1,No,22,17,,Belgium,Europe,2019,,"optrA, poxtA",-,,,,yes,yes
+GCA_021123075.1,No,1023,,,Belgium,Europe,2019,,"optrA, poxtA",-,,,,yes,yes
+GCA_021123405.1,No,104,,,Belgium,Europe,2019,,optrA,-,,,,yes,
+GCA_021123545.1,No,22,17,,Belgium,Europe,2019,,"optrA, poxtA",-,,,,yes,yes
+GCA_021124165.1,No,278,,,Belgium,Europe,2019,,optrA,-,,,,yes,
+GCA_021124315.1,No,-,,,Belgium,Europe,2020,,optrA,-,,,,yes,
+GCA_021124445.1,No,1023,,,Belgium,Europe,2019,,"optrA, poxtA",-,,,,yes,yes
+GCA_021560195.1,No,29,17,,China,Asia,2020,,"optrA, poxtA",-,,,,yes,yes
+GCA_025641905.1,No,184,,,China,Asia,2019,,"optrA, poxtA",-,,,,yes,yes
+GCA_025753095.1,No,-,,,China,Asia,2019,,optrA,-,,,,yes,
+GCA_025753115.1,No,-,,,China,Asia,2019,,optrA,-,,,,yes,
+GCA_025753135.1,No,1660,,,China,Asia,2019,,optrA,-,,,,yes,
+GCA_025753145.1,No,-,,,China,Asia,2019,,optrA,-,,,,yes,
+GCA_025753195.1,No,-,,,China,Asia,2019,,optrA,-,,,,yes,
+GCA_025753215.1,No,-,,,China,Asia,2019,,optrA,-,,,,yes,
+GCA_025753255.1,No,-,,,China,Asia,2019,,optrA,-,,,,yes,
+GCA_025753345.1,No,-,,,China,Asia,2020,,"optrA, poxtA",-,,,,yes,yes
+GCA_025753575.1,No,190,,,China,Asia,2019,,optrA,-,,,,yes,
+GCA_025753745.1,No,184,,,China,Asia,2019,,"optrA, poxtA",-,,,,yes,yes
+GCA_025800545.1,No,56,17,,China,Asia,2020,,"optrA, poxtA",-,,,,yes,yes
+GCA_025800625.1,No,636,,,China,Asia,2020,,"optrA, poxtA",-,,,,yes,yes
+GCA_025847735.1,No,-,,,China,Asia,2021,,optrA,-,,,,yes,
+GCA_025913595.1,No,-,,,China,Asia,2021,,"optrA, poxtA",-,,,,yes,yes
+GCA_025916235.1,No,-,,,China,Asia,2020,,optrA,-,,,,yes,
+GCA_026203855.1,No,184,,,China,Asia,2019,,"optrA, poxtA",-,,,,yes,yes
+GCA_026204185.1,No,1630,,,China,Asia,2019,,optrA,-,,,,yes,
+GCA_030179055.1,No,590,,,China,Asia,2020,,"optrA, poxtA",-,,,,yes,yes
+GCA_030179275.1,No,22,17,,China,Asia,2019,,optrA,-,,,,yes,
+GCA_030179375.1,No,-,,,China,Asia,2017,,"optrA, poxtA",-,,,,yes,yes
+GCA_009707535.1,No,1058,,,Tunisia,Europe,2015,,poxtA,-,,,,,yes
+GCA_019352635.1,No,25,17,,Portugal,Europe,2019,,poxtA,-,,,,,yes
+GCA_019352685.1,No,1263,17,,Portugal,Europe,2019,,poxtA,-,,,,,yes
+GCA_021121615.1,No,8,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021121685.1,No,-,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021121745.1,No,420,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021121825.1,No,5,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021121925.1,No,420,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021121945.1,No,420,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021122295.1,No,-,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021122585.1,No,137,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021122605.1,No,97,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021122705.1,No,-,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021122765.1,No,-,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021122805.1,No,55,17,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021123285.1,No,5,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021123345.1,No,718,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021123505.1,No,49,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021123605.1,No,5,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021123875.1,No,184,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021124205.1,No,-,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_021124265.1,No,-,,,Belgium,Europe,2019,,poxtA,-,,,,,yes
+GCA_025753075.1,No,184,,,China,Asia,2020,,poxtA,-,,,,,yes
+SRR14026459,No,-,,,Canada,North America,2015,,poxtA,,,,,,yes
+SRR14026497,No,-,,,Canada,North America,2015,,optrA,,,,,yes,
+SRR14026532,No,-,,,Canada,North America,2015,,"optrA, poxtA",,,,,yes,yes
+SRR22543276,No,117,17,,Czech Republic,Europe,2019,,"cfr(D), poxtA",vanA,,,yes,,yes
