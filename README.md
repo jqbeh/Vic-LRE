@@ -11,3 +11,6 @@ Visualisation codes to generate figures are included in the `visualisation.Rmd`.
 
 ## Directories
 Paths to directories that contain input sequences on MDU PHL server.
+
+## Citing
+Please cite this Github or the paper if you use these codes in your work or publication.
