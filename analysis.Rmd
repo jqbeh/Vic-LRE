@@ -146,7 +146,7 @@ mob_typer --infile assembly.fa --out_file output.txt
 version 1.8.1
 
 ```{bash}
-bakta --db /home/jbbeh/analysis/bakta/db assembly.fa
+bakta --db path/to/bakta/db assembly.fa
 ```
 
 
@@ -179,11 +179,11 @@ snp.matrix <- load_fasta("core.aln.fasta")
 
 hb.results.2 <- hierBAPS(snp.matrix, max.depth = 2, n.pops = 20, n.extra.rounds = Inf, quiet = TRUE)
 
-#Load tree file
+# Load tree file
 iqtree <- ape::read.tree("input.treefile")
 iqtree
 
-#Check tree tips and rhierbaps 
+# Check tree tips and rhierbaps 
 iqtree$tip.label
 hb.results.2$partition.df$Isolate
 
@@ -193,7 +193,7 @@ iqtree$tip.label %in% hb.results.2$partition.df$Isolate
 all(iqtree$tip.label %in% hb.results.2$partition.df$Isolate)
 iqtree$tip.label[!iqtree$tip.label %in% hb.results.2$partition.df$Isolate] # this will print the missing names
 
-#Plot tree
+# Plot tree
 tree.3 <- ggtree(iqtree)
 tree.3 <- tree.3 %<+% hb.results.2$partition.df
 tree.3 <- tree.3 + geom_tippoint(aes(color = factor(`level 1`)))
